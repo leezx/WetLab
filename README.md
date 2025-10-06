@@ -4,9 +4,9 @@ Wet Lab protocols
 # Perturbation
 - Ligand
 - Drug
-- CRISPR KO
-- RNAi KD
-- OE
+- CRISPR KO [Cloning]
+- RNAi KD [Cloning]
+- OE [Cloning]
 
 # Readout
 - mRNA (qRT-PCR)
