@@ -1,0 +1,13 @@
+jQuery(document).ready(function($) {
+	/*
+	$(".postTabs_divs").bind("focusin",function(){
+		$(".postTabs_divs table.table_org").each(function(){
+			if($(this).width() > $(this).parents(".postTabs_divs").width()){
+				for(var size=14;$(this).width() > $(this).parents(".postTabs_divs").width() && size>=6;--size){
+					$(this).css("font-size",size+"px");
+				}
+			}
+		});
+	});
+	*/
+});

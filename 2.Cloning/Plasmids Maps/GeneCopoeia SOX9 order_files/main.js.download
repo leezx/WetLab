@@ -1,0 +1,66 @@
+	//init
+	var t=0;//查询次数
+	var serverURL = "/wp-content/plugins/popup/popup_server.php";//服务器地址
+
+	function popup_check(){
+		jQuery.ajax({
+			url: serverURL,
+			type: 'GET',
+			dataType: 'json',
+			data: {
+				"action" : 'check',
+				"t" : ++t,
+				"reference" : window.location.href,
+			},
+		})
+		.done(function(msg) {
+			if(msg.status=="pop"){
+				$("body").find("#myModal_popup").remove();
+				$("body").append('<div id="myModal_popup" class="modal fade" style="display: none;"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer"><button type="button" class="btn btn-default close_popup" data-dismiss="modal" data-action="close_forever" >Don’t remind again</button><button type="button" class="btn btn-danger close_popup" data-dismiss="modal" data-action="close_one">Close</button></div></div></div></div>');
+				$("#myModal_popup").modal().find(".modal-title").text(msg.title).end().find(".modal-body").html(msg.info);
+
+			}else if(msg.status=="closed"){
+			}else if(msg.status=="waiting"){
+				// console.log(parseInt(msg.wait_time));
+				return window.setTimeout("popup_check()", parseInt(msg.wait_time) );
+			}
+		})
+		.fail(function(msg) {
+			// console.log("error");////////////
+		})
+		.always(function(msg) {
+			// console.log("complete");/////////////
+			console.log(msg);
+		});
+
+	}
+
+	function popup_close(action){
+		return $.ajax({
+			url: serverURL,
+			type: 'GET',
+			dataType: 'json',
+			data: {
+				"action": action,
+				"t" : ++t
+			},
+		})
+		.done(function(msg) {
+			// console.log("pop up won't show out until the browser is close.");////////////////
+		})
+		.fail(function(msg) {
+			// console.log("close error");/////////////
+		})
+		.always(function(msg) {
+			// console.log("close complete");////////////////
+		});
+
+	}
+
+jQuery(document).ready(function($) {
+	$(document).on('click', '.close_popup,.close', function(event) {
+		event.preventDefault();
+		popup_close('close_one');
+	});
+	popup_check();
+});

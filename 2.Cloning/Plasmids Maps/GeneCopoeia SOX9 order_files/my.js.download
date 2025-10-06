@@ -1,0 +1,36 @@
+jQuery(document).ready(function($) {
+	$.fn.myMenu = function(column){
+		var length = $(this).children('li').eq(column).children("ul").addClass('level2').children('li').length;
+		var wrap_content_sum = Math.ceil(length / 5);
+		// console.log(wrap_content_sum);
+		for(i=0;i<wrap_content_sum;i++){
+			//生成2级菜单外围html
+			$(this).children('li').eq(column).children("ul").append("<div class=\"aRow\" id=\"aRow"+i+"\"></div>");
+		}
+		$(this).children('li').eq(column).children("ul").addClass('level2').children('li').each(function(i,n){
+			$(this).appendTo("#aRow"+Math.floor(i/5));
+
+		}).children("ul").addClass('level3');
+
+		//调整菜单定位
+		// var level2_offset = $(this).children('li').eq(column).children("ul").addClass('level2').position();
+		// // var DOM = $(this);
+		// // $(this).children('li').eq(column).children("ul").addClass('level2').offset({left:DOM.offset().left})
+		// console.log(level2_offset );
+		var sumWidth=0;
+		$(this).children('li').each(function(index, el) {
+			if(column==0){
+				// console.log($(this).outerWidth(true));
+				// console.log($(this).innerWidth());
+				sumWidth = $(this).outerWidth(true) - $(this).innerWidth();
+				return false;
+			}
+			if(index < column){
+				sumWidth += $(this).outerWidth(true);
+			}
+		});
+		// console.log(sumWidth);
+		$(this).children('li').eq(column).children("ul").addClass('level2').offset({left:-sumWidth});
+
+	}
+});

@@ -1,0 +1,42 @@
+var items = new Array();
+jQuery(document).ready(function(){
+
+    $("input[name='cat_nos[]']").each(function(){
+    	items.push($(this).val());
+    });
+
+    if(items.length != 0){//有输入才发起ajax请求
+        $.ajax({
+        	async: false,
+            type: "POST",
+            dataType: "html",
+            url: "/wp-content/plugins/pio-product/pio-ajax.php",
+            data: "action=pio&items="+items,
+            success: function(d){//有返回才显示窗口
+                var obj = JSON.parse(d);
+                if(obj.length!=0){
+                    $("#boughttogether").css("display","inline");
+                }
+                var pattern = /catalog_./;
+                for (var key in obj){
+                    console.log(key);
+                    console.log(obj[key]);
+                    if(key){
+                        $("#"+key).html(obj[key]);//遍历添加cat_no
+                        if(pattern.test(key)){//正则为cat_no添加链接
+                            $("#"+key).attr("href","/product/search2/?s="+obj[key]+"&search_type=1&submit=Submit&utm_source=genecopoeia.com&utm_medium=display&utm_campaign=boughttogether");
+                        }
+                        $("."+key).css("display","table-row");//有货号才显示
+                    }
+                }
+            }
+        });
+    }
+});
+//1、显示浮窗
+//2、通过pioCatNoId给pioCatNo的div的a标签的href属性赋值并且设置html值
+//3、通过pioDescId给pioDesc的div的p标签设置html值
+
+//{"catalog_1":"D012","desc_1":"non-toxic and non-mutagenic DNA gel stains","catalog_2":"HmiR-AN0832-AM03-B","desc_2":"miRNA inhibitor against hsa-miR-92a-3p(Bacterial stock)","catalog_3":"TPCR-050","desc_3":"Target site PCR kit, 50 rxns","catalog_4":"HmiR-AN0295-AM03-B","desc_4":"miRNA inhibitor against hsa-miR-19b-3p(Bacterial stock)","css":"http:\/\/gcdev.fulengen.cn\/wp-content\/plugins\/pio-product\/css\/pio-product.css"}
+//Realated Products
+//product/search2/?s=&search_type=1&submit=Submit

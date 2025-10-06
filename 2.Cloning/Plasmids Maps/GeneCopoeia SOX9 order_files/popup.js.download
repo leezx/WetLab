@@ -1,0 +1,43 @@
+jQuery(document).ready(function($) {
+    $(".moreInfo").click(function(){
+		$("body").append('<div id="msg_popup"><p>'+$(this).attr("title")+'</p><br /><br /><input id="ok" type="button" value="Close" /></div>');
+		
+		$.blockUI({
+			message: $('#msg_popup'),
+			title: 'Description',
+			theme: true, 
+			draggable: true
+		});
+		$("#ok").click(function(){
+			$.unblockUI({
+				onUnblock:function(){$("#msg_popup").remove();}
+			}); 
+			return false;
+		});
+		return false;
+	});
+
+	jQuery.msg_popup = function (msgTitle,msgContent){
+		if(!msgTitle)msgTitle='Message: ';
+		if(!msgContent)msgContent='No Content.';
+		$("body").append('<div id="msg_popup"><p>'+msgContent+'</p><br /><br /><input id="ok_botton" type="button" value="Close" /></div>');
+		
+		$.blockUI({
+			message: $('#msg_popup'),
+			themedCSS: { 
+			top:    '15%', 
+			left:   '35%' 
+			}, 
+			title: msgTitle,
+			theme: true, 
+			draggable: true
+		});
+		$("#ok_botton").click(function(){
+			$.unblockUI({
+				onUnblock:function(){$("#msg_popup").remove();}
+			}); 
+			return false;
+		});
+		return false;
+	}
+});
