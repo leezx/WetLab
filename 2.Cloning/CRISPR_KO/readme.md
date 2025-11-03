@@ -32,3 +32,7 @@ Design PCR/Sanger primers (Detect Indel, Frameshift effect in cells) 原则：�
   - add to order
 5. UCSC In-Silico PCR: https://genome.ucsc.edu/cgi-bin/hgPcr?hgsid=3302260901_mgABTR5vJpBB8AlpsolNAJxSipV4
 
+ref:
+1. Cancer实验系列之一 | 开篇 | Molecular cloning | 分子克隆 - https://www.cnblogs.com/leezx/p/17150023.html
+2. 引物设计 | Primer design - https://www.cnblogs.com/leezx/p/17492590.html
+
