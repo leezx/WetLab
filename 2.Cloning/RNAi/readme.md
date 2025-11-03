@@ -20,3 +20,6 @@ Order oligos:
 - Purification HPLC
 
 3 sets of shRNA 117 bp: $350
+
+ref:
+- Inducible shRNA | 可诱导的shRNA基因敲除技术 | lentivirus克隆 | JARID2 - https://www.cnblogs.com/leezx/p/17510373.html
