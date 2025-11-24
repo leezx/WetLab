@@ -20,6 +20,10 @@ Dropbox
 Put samples and order receipt together:
 - Please print out the PDF Order Confirmation Page that will appear, and send it in with your samples.
 
+genewiz report analysis
+- sanger seq:	caccg	sgRNA	gttt
+- files: /Volumes/HOME/Github/WetLab/2.Cloning/Bacteria/results/TWEAKR-sg-sanger
+
 ref:
 - [PCR Genotyping | 利用PCR来确定基因型 | Sanger sequencing | T7E1 | TIDE | NGS](https://www.cnblogs.com/leezx/p/17510358.html)
 
